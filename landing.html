@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Welcome to Cheeser Inc.</title>
+    <link rel="icon" href="assets/cheese.png" type="image/x-icon">
+    <link href="https://fonts.cdnfonts.com/css/br-segma" rel="stylesheet">
+    <style>
+        /* Thanks to MildWolfie on StackOverflow for showing a better way to align divs to the center :)*/
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        html {
+            display: table;
+            margin: auto;
+            font-family: 'Br Segma', sans-serif;
+        }
+
+        body {
+            display: table-cell;
+            vertical-align: middle;
+            background-color: gray;
+            transition: opacity 0.5s;
+            opacity: 0;
+        }
+
+        #container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: rgba(0, 0, 0, 0.3) 5px 5px 5px;
+        }
+
+        #containerlogo {
+            height: 150px;
+            width: 150px;
+        }
+
+        #buttoncontainer {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(1, 1fr);
+            gap: 20px;
+        }
+
+        .gridbutton {
+            background-color: rgb(219, 219, 219);
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            border: 1px solid gray;
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 2px 2px;
+            font-family: 'Br Segma', sans-serif;
+            font-weight: 900;
+            cursor: pointer;
+        }
+
+        .gridbutton:hover {
+            transform: translateY(-10px);
+            box-shadow: rgba(0, 0, 0, 0.3) 0px 12px 2px;
+        }
+
+        .gridbutton:active {
+            transform: none;
+            box-shadow: none;
+            background-color: rgb(184, 184, 184);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <img id="containerlogo" alt="Cheeser Inc. Logo" src="assets/logo.png"></img>
+        <h1 id="containertitle">Where would you like to go?</h1>
+        <div id="buttoncontainer">
+            <button class="gridbutton" id="button1" onclick="redirectToPage('https://portfolio.cheeserinc.com');">
+                <img src="assets/banana.png" alt="Portfolio Icon" style="height: 50px;"><br>
+                My Portfolio
+            </button>
+            <button class="gridbutton" id="button2" onclick="redirectToPage('https://corp.cheeserinc.com');">
+                <img src="assets/logo.png" alt="Company Icon" style="height: 50px;"><br>
+                Company Page
+            </button>
+            <button class="gridbutton" id="button3" onclick="redirectToPage('https://pollify.cheeserinc.com');">
+                <img src="assets/pollify.png" alt="Pollify Icon" style="height: 50px;"><br>
+                Pollify
+            </button>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    questions = ["Where would you like to go?", "Where are you headed?", "What are you looking for?"];
+
+    window.addEventListener('beforeunload', hideContainer);
+
+    function showContainer() {
+        document.body.style.opacity = 1;
+        document.getElementById("containertitle").innerText = questions[Math.floor(Math.random() * questions.length)];
+    }
+
+    function hideContainer() {
+        document.body.style.opacity = 0;
+    }
+
+    window.onload = showContainer;
+
+    function redirectToPage(url) {
+        window.location.href = url;
+
+        hideContainer();
+    }
+
+</script>
+
+</html>
